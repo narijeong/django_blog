@@ -15,13 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-# TODO: delete this
-from django.conf.urls import url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
-    # TODO: delete these
-    # url(r'^blog/', include('blog.urls', namespace='blog', app_name='blog')),
-    # url(r'^blog/', include('blog.urls')),
 ]
