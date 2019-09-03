@@ -4,9 +4,16 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.generic.list import ListView
 from .forms import EmailPostForm
 from django.core.mail import send_mail
+from taggit.models import Tag
 
-def post_list(request):
+def post_list(request, tag_slug=None):
     object_list = Post.published.all()
+    tag=None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+
     paginator = Paginator(object_list, 3)
     page = request.GET.get('page')
     try:
@@ -17,7 +24,7 @@ def post_list(request):
     except EmptyPage:
         # If page si out of range deliver the last page of the result
         posts = paginator.page(paginator.num_pages)
-    return render(request, 'blog/post/list.html', {'page': page, 'posts': posts})
+    return render(request, 'blog/post/list.html', {'page': page, 'posts': posts, 'tag': tag})
 
 class PostListView(ListView):
     queryset = Post.published.all()
