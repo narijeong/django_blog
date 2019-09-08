@@ -25,8 +25,7 @@ SECRET_KEY = 'hlfr)&47ym%z372@%g*=gtxz^f27aa!#93ab=m=4+h083aj6m)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['stormy-crag-90996.herokuapp.com']
-
+ALLOWED_HOSTS = ['127.0.0.1']
 
 # Application definition
 
